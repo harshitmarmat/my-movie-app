@@ -17,6 +17,16 @@ class App extends React.Component{
     console.log(this.props.store.getState());
   }
 
+  isFavourite = (movie) => {
+    const { favourite } = this.props.store.getState();
+
+    const index = favourite.indexOf(movie);
+
+    if(index !== -1){
+      return true;
+    }
+    return false;
+  }
   render(){
   const {list} = this.props.store.getState();
   console.log('RENDER');
@@ -30,7 +40,13 @@ class App extends React.Component{
           </div>
           <div className="list">
             {list.map((movie, index) =>(
-              <MovieCard  movie={movie} key={`movies-${index}`} />      //unclear
+              <MovieCard  
+                movie={movie} 
+                key={`movies-${index}`}
+                getState={this.props.store.getState} 
+                dispatch={this.props.store.dispatch}
+                isFavourite = {this.isFavourite(movie)}
+              />      //unclear
             ))}
           </div>
         </div>
