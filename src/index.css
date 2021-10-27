@@ -125,6 +125,9 @@ body {
 .active-tabs {
   background: #2185d0 !important;
   color: white;
+  padding: 10px;
+  margin-right: 13px;
+  border-radius: 3px;
 }
 
 .main .tabs .tab:hover {

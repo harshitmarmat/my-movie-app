@@ -1,16 +1,20 @@
 import React from "react";
-import {addFavourite}  from "../actions"
-
+import { compose } from "redux";
+import {addtofavourite}  from "../actions"
+import {removefromfavourite} from "../actions"
 
 class MovieCard extends React.Component {
 
     favouriteClickListener = () => {
         const { movie} = this.props;
-        this.props.dispatch(addFavourite(movie));
+        this.props.dispatch(addtofavourite(movie));
         console.log(this.props.getState());
     }
-    unfavouriteClickListener = () => {
 
+    unfavouriteClickListener = () => {
+        const {movie} = this.props;
+        this.props.dispatch(removefromfavourite(movie));
+        console.log(this.props.getState())
     }
     render () {
         const {movie , isFavourite} = this.props;
