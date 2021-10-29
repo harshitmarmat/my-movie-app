@@ -19,7 +19,8 @@ class App extends React.Component{
   }
 
   isFavourite = (movie) => {
-    const { favourite } = this.props.store.getState();
+    const { movies } = this.props.store.getState();
+    const { favourite } = movies;
 
     const index = favourite.indexOf(movie);
 
@@ -34,12 +35,15 @@ class App extends React.Component{
   }
 
   render(){
-  const {list , favourite , showFavourite} = this.props.store.getState();
+  const { movies } = this.props.store.getState();
+  const {list , favourite , showFavourite} = movies;
   const displayTab = showFavourite?favourite:list;
   console.log('RENDER');
     return (
       <div className="App">
-        <Navbar />
+        <Navbar 
+          dispatch={this.props.store.dispatch}
+        />
         <div  className="main">
           <div className="tabs">
             <div className={`${showFavourite?'tab':'active-tabs'}`} onClick= {()=>this.setShow(false)} >Movies</div>
