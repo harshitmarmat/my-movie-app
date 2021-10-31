@@ -17,7 +17,7 @@ import App from './components/App';
 
 const logger = ({dispatch,getState}) => (next) => (action) =>{
   //logger code
-  if( typeof action === 'function' ) {
+  if( typeof action !== 'function' ) {
     console.log("Action type", action.type);
   }
   next(action);

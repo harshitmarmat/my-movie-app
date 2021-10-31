@@ -4,7 +4,10 @@ import {
     ADD_MOVIES, 
     ADD_TO_FAVOURITE, 
     REMOVE_FROM_FAVOURITE, 
-    SET_SHOW_FAVOURITE 
+    SET_SHOW_FAVOURITE,
+    ADD_SEARCH_MOVIE,
+    ADD_MOVIE_SEARCH_RESULT,
+    ADD_MOVIE_TO_LIST
 } from "../actions";
 
 const intialMovieList = {
@@ -46,17 +49,43 @@ function movies(state = intialMovieList, action){
                 ...state,
                 showFavourite : action.val
             }
+        case ADD_MOVIE_TO_LIST :
+            return {
+                ...state,
+                list : [action.movie, ...state.list]
+            }
         default :
             return state;
     }
 }
 
 const initialSearchState = {
-    result : {}
+    result : {},
+    showSearchResults : false
 }
 
 function search (state = initialSearchState , action ){
-    return state;
+    switch(action.type) {
+        case ADD_MOVIE_SEARCH_RESULT :
+            return {
+                ...state,
+                result : action.movie,
+                showSearchResults : true
+            }
+        case ADD_SEARCH_MOVIE :
+            return {
+                ...state,
+                result :action.movie,
+                // showSearchResults : false
+            }   
+        case ADD_MOVIE_TO_LIST :
+            return {
+                ...state,
+                showSearchResults : false
+            }
+        default :
+            return state;
+    }
 }
 
 // const intialRootState = {
@@ -71,6 +100,7 @@ function search (state = initialSearchState , action ){
 
 //     }
 // }
+
 
 export default combineReducers({
     movies,
